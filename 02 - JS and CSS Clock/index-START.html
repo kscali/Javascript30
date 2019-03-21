@@ -5,7 +5,7 @@
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
+    <h1>My Javascript Clock</h1>
 
     <div class="clock">
       <div class="clock-face">
@@ -62,13 +62,47 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+
+    h1 {
+      display: block;
+      color: black;
+      position: absolute;
+      top: 0;
+      justify-content: center;
+      font-size: 50px;
+      left: 35%;
+      margin-right: -50%;
     }
 
   </style>
 
   <script>
+    const secondHand = document.querySelector('.second-hand');
+    function setDate() {
+      const now = new Date();
+
+      const seconds = now.getSeconds();
+      const secondsDegrees = ((seconds/60) * 360) + 90;
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
 
+      const minuteHand = document.querySelector('.min-hand');
+      const minutes = now.getMinutes();
+      const minutesDegrees = ((minutes/60) * 360) + 90;
+      minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+
+      const hourHand = document.querySelector('.hour-hand');
+      const hour = now.getHours();
+      const hourDegrees = ((hour / 60) * 360) + 90;
+
+    }
+
+    setInterval(setDate, 1000);
   </script>
 </body>
 </html>
